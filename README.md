@@ -1,7 +1,23 @@
 # ⚡ Optimizer Comparison Dashboard
-### ML Coursework — Breast Cancer Wisconsin Dataset
 
-Compare Adam, SGD, RMSprop, and Adagrad on a Neural Network classification task using TensorFlow/Keras, visualized in an interactive Streamlit dashboard.
+An interactive machine learning project that compares the performance of different optimization algorithms — **Adam, SGD, RMSprop, and Adagrad** — on a neural network classification task using the **Breast Cancer Wisconsin Dataset**.
+
+The project includes a **Streamlit dashboard** to visualize results and analyze optimizer behavior in real time.
+
+---
+
+## 📌 Features
+
+* Compare multiple optimizers on the same neural network
+* Interactive dashboard built with Streamlit
+* Visualization of:
+
+  * Accuracy
+  * Loss
+  * Training time
+  * Convergence speed
+* Clean and modular code structure
+* Reproducible experiments
 
 ---
 
@@ -9,118 +25,160 @@ Compare Adam, SGD, RMSprop, and Adagrad on a Neural Network classification task 
 
 ```
 optimizer_comparison/
-├── train.py          ← Neural Network training + evaluation logic
-├── app.py            ← Streamlit dashboard
-├── requirements.txt  ← Python dependencies
-├── results/          ← Auto-created after training
+├── train.py              # Model training and evaluation logic
+├── app.py                # Streamlit dashboard
+├── requirements.txt      # Dependencies
+├── results/              # Generated results (JSON)
 │   └── comparison_results.json
 └── README.md
 ```
 
 ---
 
-## 🚀 Setup & Run
+## 🚀 Getting Started
 
-### Step 1 — Clone / Download the project
-Place all files in a folder called `optimizer_comparison/`.
+### 1. Clone the repository
 
-### Step 2 — Create a virtual environment (recommended)
-```bash
+```
+git clone https://github.com/your-username/optimizer-comparison-ml.git
+cd optimizer-comparison-ml
+```
+
+---
+
+### 2. Create virtual environment (recommended)
+
+**Windows:**
+
+```
 python -m venv venv
-
-# Activate (Windows):
 venv\Scripts\activate
+```
 
-# Activate (Mac/Linux):
+**Mac/Linux:**
+
+```
+python3 -m venv venv
 source venv/bin/activate
 ```
 
-### Step 3 — Install dependencies
-```bash
+---
+
+### 3. Install dependencies
+
+```
 pip install -r requirements.txt
 ```
 
-### Step 4A — Run standalone training (optional)
-This trains all 4 optimizers and saves results to `results/comparison_results.json`.
-```bash
+---
+
+### 4. Run the project
+
+#### Option A — Run training script
+
+```
 python train.py
 ```
 
-### Step 4B — Launch the Streamlit App
-```bash
+This generates:
+
+```
+results/comparison_results.json
+```
+
+---
+
+#### Option B — Launch dashboard
+
+```
 streamlit run app.py
 ```
 
-Then open your browser at **http://localhost:8501**
+Open in browser:
 
-In the app, click **"Train All Optimizers"** in the sidebar to start training.
+```
+http://localhost:8501
+```
+
+Use the sidebar button **"Train All Optimizers"** to run experiments.
 
 ---
 
 ## 🧠 Model Architecture
 
-```
-Input (30 features)
-    ↓
-Dense(64, ReLU)
-    ↓
-Dropout(0.2)
-    ↓
-Dense(32, ReLU)
-    ↓
-Dense(1, Sigmoid)  ← Binary output
-```
+* Input Layer: 30 features
+* Dense Layer: 64 neurons (ReLU)
+* Dropout: 0.2
+* Dense Layer: 32 neurons (ReLU)
+* Output Layer: 1 neuron (Sigmoid)
 
-**Loss:** Binary Crossentropy  
-**Metrics:** Accuracy  
+**Loss Function:** Binary Crossentropy
+**Evaluation Metric:** Accuracy
 
 ---
 
 ## ⚙️ Training Configuration
 
-| Setting      | Value |
-|-------------|-------|
-| Epochs      | 50    |
-| Batch Size  | 32    |
-| Learning Rate | 0.001 |
+| Parameter        | Value |
+| ---------------- | ----- |
+| Epochs           | 50    |
+| Batch Size       | 32    |
+| Learning Rate    | 0.001 |
 | Train/Test Split | 80/20 |
-| Random Seed | 42    |
+| Random Seed      | 42    |
 
 ---
 
 ## 📊 Optimizers Compared
 
-| Optimizer | Configuration |
-|-----------|--------------|
-| Adam      | lr=0.001 (default betas) |
-| SGD       | lr=0.001, momentum=0.9 |
-| RMSprop   | lr=0.001 |
-| Adagrad   | lr=0.001 |
+| Optimizer | Description                                                 |
+| --------- | ----------------------------------------------------------- |
+| Adam      | Adaptive learning rate with momentum                        |
+| SGD       | Stochastic Gradient Descent with momentum                   |
+| RMSprop   | Adaptive learning using moving average of squared gradients |
+| Adagrad   | Adaptive learning for sparse features                       |
 
 ---
 
 ## 📈 Evaluation Metrics
 
-- **Accuracy** — Final test set accuracy
-- **Loss** — Final validation loss
-- **Training Time** — Wall-clock seconds
-- **Convergence Epoch** — First epoch where val_loss < 50% of initial loss
+* **Accuracy** — Final test performance
+* **Loss** — Validation loss
+* **Training Time** — Execution duration
+* **Convergence Speed** — Epoch at which model stabilizes
 
 ---
 
-## 🗣️ Viva Quick Notes
+## 🎯 Key Objective
 
-**Q: Why is Adam generally preferred?**
-Adam combines momentum + adaptive learning rates per parameter. It requires minimal tuning and converges fast across diverse tasks.
+To analyze how different optimization algorithms affect:
 
-**Q: When would you use SGD?**
-SGD with momentum can achieve better generalization on large-scale vision tasks (ResNet, VGG) with careful LR scheduling.
+* Training speed
+* Model convergence
+* Final performance
 
-**Q: When is Adagrad useful?**
-Sparse data / NLP tasks where infrequent features need larger gradient updates.
+All experiments are conducted using the **same model architecture** to ensure a fair comparison.
 
-**Q: Why same architecture for all optimizers?**
-Scientific fairness — we isolate the optimizer as the only variable.
+---
 
-**Q: What is convergence speed?**
-The epoch at which validation loss drops below 50% of its starting value — a proxy for how quickly the model learns.
+## 🛠️ Tech Stack
+
+* Python
+* TensorFlow / Keras
+* Scikit-learn
+* Streamlit
+* Plotly
+* Pandas / NumPy
+
+---
+
+## 📌 Future Improvements
+
+* Add more optimizers (AdamW, Nadam)
+* Hyperparameter tuning
+* Support for multiple datasets
+* Save and compare experiment runs
+
+---
+
+This project demonstrates practical implementation of optimization algorithms and their impact on neural network performance.
